@@ -6,7 +6,7 @@ OBJS = main.o src/linear.o
 
 CFLAGS = -Wall -std=c99 -Wextra -Werror
 
-Links = -Llib -l3man
+Links = -Llib -l3man -lc3sv
 
 all: $(TARGET)
 
