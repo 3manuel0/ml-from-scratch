@@ -10,6 +10,15 @@ f64 calc_mean(f64 *nums, size_t count){
     return sum / count;
 }
 
+// Standard Form of a sigmoid
+f64 sigmoid(f64 n){
+    return 1.0 / (1.0 + exp(-n));
+}
+
+// ReLU (Rectified Linear Unit)
+f64 relu(f64 n){
+    return n > 0.0 ? n : 0.0;
+}
 // void linear_regression(size_t iter, f64 *values,f64 *result ,size_t count){
     // predicted = a*x + b
     // error = predicted - y
@@ -104,6 +113,11 @@ void matrix_sub(Matrix *a, Matrix b){
 void matrix_scale(Matrix *matrix, f64 k){
     for(size_t i = 0; i < matrix->cols * matrix->rows; i++)
         matrix->mtx[i] *= k;
+}
+
+void matrix_map(Matrix *matrix, f64(*func)(f64)){
+    for(size_t i = 0; i < matrix->cols * matrix->rows; i++)
+        matrix->mtx[i] = func(matrix->mtx[i]);
 }
 
 void matrix_print(Matrix matrix){

@@ -1,9 +1,11 @@
 #include "includes/csv.h"
 #include "includes/lib3man.h"
 #include "includes/ml.h"
-#include <stddef.h>
-#include <stdlib.h>
 
+// for testing 
+f64 add_one(f64 n){
+    return n + 1;
+}
 
 int main(){
     // sv strs[] = {sv_from_lit("test1"), sv_from_lit("test2"), sv_from_lit("test3"),sv_from_lit("test4")};
@@ -25,8 +27,13 @@ int main(){
     matrix_print(m);
     matrix_scale(&m, 2.5);
     matrix_add(&m, b);
+    printf("----------------------------\n");
     matrix_print(m);
+    printf("----------------------------\n");
     matrix_sub(&m, b);
+    matrix_print(m);
+    printf("----------------------------\n");
+    matrix_map(&m, sigmoid);
     matrix_print(m);
     // csv_print_types(csv);
     return 0;
