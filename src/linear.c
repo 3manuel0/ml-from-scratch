@@ -91,6 +91,16 @@ void matrix_add(Matrix *a, Matrix b){
     }
 }
 
+void matrix_sub(Matrix *a, Matrix b){
+    if(a->cols != b.cols || b.rows != a->rows){
+        printf("MATRIXES ARE NOT THE SAME DEMENSIONS\n");
+        return;
+    }
+    for(size_t i = 0; i < a->cols * a->rows; i++){
+        a->mtx[i] -= b.mtx[i];
+    }
+}
+
 void matrix_scale(Matrix *matrix, f64 k){
     for(size_t i = 0; i < matrix->cols * matrix->rows; i++)
         matrix->mtx[i] *= k;

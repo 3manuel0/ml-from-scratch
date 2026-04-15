@@ -26,6 +26,8 @@ int main(){
     matrix_scale(&m, 2.5);
     matrix_add(&m, b);
     matrix_print(m);
+    matrix_sub(&m, b);
+    matrix_print(m);
     // csv_print_types(csv);
     return 0;
 }

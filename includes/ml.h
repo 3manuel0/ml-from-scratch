@@ -18,6 +18,7 @@ typedef struct Matrix{
 Matrix matrix_create(size_t rows, size_t cols);
 int matrix_fill(Matrix *matrix, f64 value);
 void matrix_add(Matrix *a, Matrix b);
+void matrix_sub(Matrix *a, Matrix b);
 void matrix_scale(Matrix *matrix, f64 k);
 void matrix_print(Matrix matrix);
 void csv_linear_regression(CSV *csv, size_t iter, sv *cols, size_t count);
