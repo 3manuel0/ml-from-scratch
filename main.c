@@ -5,10 +5,7 @@
 #include <stdlib.h>
 
 
-
-
 int main(){
-
     // sv strs[] = {sv_from_lit("test1"), sv_from_lit("test2"), sv_from_lit("test3"),sv_from_lit("test4")};
     CSV *csv = load_csv("advertising.csv");
     size_t nrow = csv->numrows;
