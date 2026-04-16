@@ -45,9 +45,13 @@ void matrix_sub(Matrix *a, Matrix b);
 
 void matrix_scale(Matrix *matrix, f64 k);
 
+Matrix matrix_copy(Matrix src);
+
 void matrix_map(Matrix *matrix, f64(*func)(f64));
 
 void matrix_print(Matrix matrix);
+
+void Matrix_free(Matrix *matrix);
 
 void csv_linear_regression(CSV *csv, size_t iter, sv *cols, size_t count);
 

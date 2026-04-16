@@ -1,5 +1,7 @@
 #include "../includes/ml.h"
 #include <math.h>
+#include <stdlib.h>
+#include <string.h>
 
 f64 calc_mean(f64 *nums, size_t count){
     f64 sum = 0;
@@ -120,6 +122,12 @@ void matrix_scale(Matrix *matrix, f64 k){
         matrix->mtx[i] *= k;
 }
 
+Matrix matrix_copy(Matrix src){
+    Matrix m = matrix_create(src.rows, src.cols);
+    memcpy(m.mtx, src.mtx, src.rows * src.rows * sizeof(f64));
+    return m;
+}
+
 void matrix_map(Matrix *matrix, f64(*func)(f64)){
     for(size_t i = 0; i < matrix->cols * matrix->rows; i++)
         matrix->mtx[i] = func(matrix->mtx[i]);
@@ -136,16 +144,24 @@ void matrix_print(Matrix matrix){
     }
 }
 
+void Matrix_free(Matrix *matrix){
+    free(matrix->mtx);
+    matrix->cols = 0;
+    matrix->rows = 0;
+}
+
 u32 u32_random(void) {
     u32 value = 0;
 
     #ifdef _WIN32
+        // for windows 
         BCryptGenRandom(NULL,
                         (unsigned char*)&value,
                         sizeof(value),
                         BCRYPT_USE_SYSTEM_PREFERRED_RNG);
 
     #elif defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__)
+        // for freebsd/macos 
         arc4random_buf(&value, sizeof(value));
 
     #else
