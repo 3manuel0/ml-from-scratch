@@ -35,6 +35,8 @@ int main(){
     printf("----------------------------\n");
     matrix_map(&m, sigmoid);
     matrix_print(m);
-    // csv_print_types(csv);
+    printf("----------------------------\n");
+    matrix_randomize(&m, 7.5, 100.0);
+    matrix_print(m);
     return 0;
 }

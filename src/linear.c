@@ -1,7 +1,5 @@
 #include "../includes/ml.h"
 #include <math.h>
-#include <stddef.h>
-#include <stdio.h>
 
 f64 calc_mean(f64 *nums, size_t count){
     f64 sum = 0;
@@ -46,7 +44,7 @@ f64 relu(f64 n){
 // }
 
 
-// Least Squares
+//Linear Regression (Using Least Squares)
 void linear_regressionLS(f64 *values,f64 *result ,size_t count){
     f64 mean_x = calc_mean(values, count);
     f64 mean_y = calc_mean(result, count);
@@ -90,6 +88,13 @@ int matrix_fill(Matrix *matrix, f64 value){
     return true;
 }
 
+void matrix_randomize(Matrix* matrix, f64 min, f64 max){
+    for(size_t i = 0; i < matrix->cols * matrix->rows; i++){
+        f64 u = (f64)u32_random() / (f64)UINT32_MAX;
+        matrix->mtx[i] = min + u * (max - min);
+    }
+}
+
 void matrix_add(Matrix *a, Matrix b){
     if(a->cols != b.cols || b.rows != a->rows){
         printf("MATRIXES ARE NOT THE SAME DEMENSIONS\n");
@@ -129,4 +134,33 @@ void matrix_print(Matrix matrix){
         printf("|");
         printf("\n");
     }
+}
+
+u32 u32_random(void) {
+    u32 value = 0;
+
+    #ifdef _WIN32
+        BCryptGenRandom(NULL,
+                        (unsigned char*)&value,
+                        sizeof(value),
+                        BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+
+    #elif defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__)
+        arc4random_buf(&value, sizeof(value));
+
+    #else
+        // for linux
+        ssize_t result = getrandom(&value, sizeof(value), 0);
+
+        // incase getrandom failed
+        if (result < 0) {
+            FILE *f = fopen("/dev/urandom", "rb");
+            if (f) {
+                fread(&value, sizeof(value), 1, f);
+                fclose(f);
+            }
+        }
+    #endif
+
+    return value;
 }
