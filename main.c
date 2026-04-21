@@ -36,14 +36,14 @@ int main(){
     matrix_map(&m, sigmoid);
     matrix_print(m);
     printf("----------------------------\n");
-    matrix_randomize(&m, 7.5, 100.0);
+    matrix_randomize(&m, -10, 105.0);
     matrix_print(m);
     printf("----------------------------\n");
     Matrix s = matrix_copy(m);
     matrix_print(s);
     // Free the memory that has data and reset the matrix
-    Matrix_free(&m);
-    Matrix_free(&b);
-    Matrix_free(&s);
+    matrix_free(&m);
+    matrix_free(&b);
+    matrix_free(&s);
     return 0;
 }

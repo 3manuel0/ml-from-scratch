@@ -51,7 +51,7 @@ void matrix_map(Matrix *matrix, f64(*func)(f64));
 
 void matrix_print(Matrix matrix);
 
-void Matrix_free(Matrix *matrix);
+void matrix_free(Matrix *matrix);
 
 void csv_linear_regression(CSV *csv, size_t iter, sv *cols, size_t count);
 
