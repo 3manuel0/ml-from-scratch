@@ -43,6 +43,8 @@ void matrix_add(Matrix *a, Matrix b);
 
 void matrix_sub(Matrix *a, Matrix b);
 
+void matrix_mul(Matrix *a, Matrix b);
+
 void matrix_scale(Matrix *matrix, f64 k);
 
 Matrix matrix_copy(Matrix src);

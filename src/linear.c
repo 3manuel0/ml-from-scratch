@@ -1,6 +1,8 @@
 #include "../includes/ml.h"
 #include <assert.h>
 #include <math.h>
+#include <stdio.h>
+#include <unistd.h>
 
 f64 calc_mean(f64 *nums, size_t count){
     f64 sum = 0;
@@ -123,6 +125,16 @@ void matrix_sub(Matrix *a, Matrix b){
     for(size_t i = 0; i < a->cols * a->rows; i++){
         a->mtx[i] -= b.mtx[i];
     }
+}
+
+void matrix_mul(Matrix *a, Matrix b){
+    assert(a != NULL);
+    assert(a->mtx != NULL && b.mtx != NULL);
+    if(a->cols != b.rows || (a->cols & b.cols) > 0 || (a->rows & b.rows) > 0 ){
+        printf("UNDIFINED BEHAVIOUR!\n");
+        return;
+    }
+    // TODO : ADD LOGIC 
 }
 
 void matrix_scale(Matrix *matrix, f64 k){
