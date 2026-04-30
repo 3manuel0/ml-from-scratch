@@ -175,34 +175,3 @@ void matrix_free(Matrix *matrix){
     matrix->cols = 0;
     matrix->rows = 0;
 }
-
-u32 u32_random(void) {
-    u32 value = 0;
-
-    #ifdef _WIN32
-        // for windows 
-        BCryptGenRandom(NULL,
-                        (unsigned char*)&value,
-                        sizeof(value),
-                        BCRYPT_USE_SYSTEM_PREFERRED_RNG);
-
-    #elif defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__)
-        // for freebsd/macos 
-        arc4random_buf(&value, sizeof(value));
-
-    #else
-        // for linux
-        ssize_t result = getrandom(&value, sizeof(value), 0);
-
-        // incase getrandom failed
-        if (result < 0) {
-            FILE *f = fopen("/dev/urandom", "rb");
-            if (f) {
-                fread(&value, sizeof(value), 1, f);
-                fclose(f);
-            }
-        }
-    #endif
-
-    return value;
-}

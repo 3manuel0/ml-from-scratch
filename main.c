@@ -37,6 +37,7 @@ int main(){
     matrix_print(m);
     printf("----------------------------\n");
     matrix_randomize(&m, -10, 105.0);
+    // matrix_map(&m, sigmoid);
     matrix_print(m);
     printf("----------------------------\n");
     Matrix s = matrix_copy(m);

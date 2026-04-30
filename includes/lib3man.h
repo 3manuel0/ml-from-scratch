@@ -13,7 +13,6 @@ typedef int8_t i8;
 typedef int16_t i16;
 typedef int32_t i32;
 typedef int64_t i64;
-typedef uint64_t u64;
 typedef float f32;
 typedef double f64;
 #define false 0
@@ -49,7 +48,17 @@ ArenaList *create_ArenaList(size_t size);
 void *arenaList_Alloc(ArenaList **arenalist, size_t size);// reserves a size inside the arenaList and returns a pointer to the start of it
 void *arenaList_Realloc(ArenaList **arenaList, void *p, size_t oldsz , size_t newsz); // TODO REWRITE IT, IT DOESN"T WORK
 void arenaList_free(ArenaList *head);
-// #############################################################################
+// #########################################################
+
+// ############ Binary TREE ##############################################
+// TODO: IMPLIMENT BINARY TREE's FUNCTIONS
+typedef struct bt_node {
+  i64 value;
+  struct bt_node *right;
+  struct bt_node *left;
+}bt_node;
+
+// ###########################################################################
 
 // ############ Length-Based string and dynamicly allocated string #############
 typedef struct {
@@ -95,6 +104,8 @@ void sv_print(const sv *sv); // prints sdtring-view  without new line
 void sv_fwrite(const sv *sv, FILE *file); // wirtes sv to a file (also stdout/stderr)
 
 // string_buffer functions ###########################################################
+sb create_sb_empty(size_t cap);
+
 sb sb_from_cstr(const char *str);// creating a string-buffer from char *
 
 sb create_sb_inside_arenaList(ArenaList **arenaList, size_t cap);
@@ -119,13 +130,42 @@ int sb_push_char(sb *sb, char ch);// append (push) a charachter inside a string-
 
 char * cstr_from_sb(const sb *sb);// char * with /0 at the end from string_buffer
 
+int sb_readLine(sb *sb, FILE *stream);
+
+int sb_fread_all(sb *sb, FILE *stream);
+
 void sb_println(const sb *sb); // prints a string-buffer (current used bytes (chars)) with new line(\n)
 
 void sb_print(const sb *sb); // prints a string-buffer without new line
 
-void sb_writef(const sb *sb, FILE *file);// wirtes sb to a file or stdout/stderr
+int sb_fprint(const sb *sb, FILE *stream);// prints sb to file, it returns len else -1
+
+void sb_fwrite(const sb *sb, FILE *stream);// wirtes sb to a file or stdout/stderr
 
 void sb_free(sb *sb); // frees string-buffer in the heap
 // ###########################################################################################
 
+//############ Utility #######################################################################
+#ifdef _WIN32
+  #include <windows.h>
+  #include <bcrypt.h>
+  #pragma comment(lib, "bcrypt.lib")
+
+#elif defined(__APPLE__) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__)
+  #include <stdlib.h> // arc4random_buf
+
+#else
+  #include <sys/random.h>
+  #include <errno.h>
+#endif
+
+u32 u32_random(void);
+
+f64 f64_randrange(f64 min, f64 max);
+
+f32 f32_randrange(f32 min, f32 max);
+
+u32 u32_randrange(u32 min, u32 max);
+
+// ###########################################################################################
 #endif
