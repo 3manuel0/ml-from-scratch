@@ -2,13 +2,12 @@ CC = gcc
 
 TARGET = ml
 
-OBJS = main.o src/linear.o
+OBJS = main.o src/linear.o src/matrix.o
 
 CFLAGS = -Wall -std=c99 -Wextra -Werror
 
-
 ifeq ($(OS),Windows_NT)# for BCryptGenRandom in windows I need -lbcrypt
-Links = -Llib -lc3sv -l3man -lm -lbcrypt
+Links = -Llib -lc3sv -l3man -lm
 else
 Links = -Llib -lc3sv -l3man -lm
 endif

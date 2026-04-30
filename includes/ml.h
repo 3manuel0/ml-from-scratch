@@ -61,9 +61,4 @@ void linear_regression(size_t iter, f64 *values,f64 *result ,size_t count);
 
 void linear_regressionLS(f64 *values,f64 *result ,size_t count);
 
-// void linear_regression(size_t iter, f64 *values,f64 *result , min_max x, min_max y, size_t count);
-
-double random_range(double min, double max);
-
-u32 u32_random(void);
 #endif
