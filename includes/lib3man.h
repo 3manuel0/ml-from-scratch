@@ -9,6 +9,7 @@
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
+typedef uint64_t u64;
 typedef int8_t i8;
 typedef int16_t i16;
 typedef int32_t i32;
@@ -159,13 +160,44 @@ void sb_free(sb *sb); // frees string-buffer in the heap
   #include <errno.h>
 #endif
 
-u32 u32_random(void);
+u32 u32_entropy_random(void);//os based unsigned 32bit integer pseudo-random entropy generator
 
-f64 f64_randrange(f64 min, f64 max);
+f64 f64_random_range(f64 min, f64 max);// return float 64bit (double) based on a range [min, max]
 
-f32 f32_randrange(f32 min, f32 max);
+f32 f32_random_range(f32 min, f32 max);// return float 32bit (float) based on a range [min, max]
 
-u32 u32_randrange(u32 min, u32 max);
+u32 u32_random_range(u32 min, u32 max);// return unsigned integer 32bit based on a range [min, max]
+// ###########################################################################################
+
+//############ Matrix #######################################################################
+typedef struct Matrix{
+    f64    *mtx;
+    size_t rows;
+    size_t cols;
+}Matrix;
+// TODO : I NEED TO FINISH THIS MATRix functions
+Matrix matrix_create(size_t rows, size_t cols);
+
+int matrix_fill(Matrix *matrix, f64 value);
+
+void matrix_randomize(Matrix* matrix, f64 min, f64 max);
+
+void matrix_add(Matrix *a, Matrix b);
+
+void matrix_sub(Matrix *a, Matrix b);
+
+void matrix_mul(Matrix *a, Matrix b);
+
+void matrix_scale(Matrix *matrix, f64 k);
+
+Matrix matrix_copy(Matrix src);
+
+void matrix_map(Matrix *matrix, f64(*func)(f64));
+
+void matrix_print(Matrix matrix);
+
+void matrix_free(Matrix *matrix);
 
 // ###########################################################################################
+
 #endif

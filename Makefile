@@ -2,7 +2,7 @@ CC = gcc
 
 TARGET = ml
 
-OBJS = main.o src/linear.o src/matrix.o
+OBJS = main.o src/linear.o 
 
 CFLAGS = -Wall -std=c99 -Wextra -Werror
 
