@@ -20,8 +20,8 @@ int main(){
         // printf("value %lf result %lf\n", values[i], results[i]);
     }
     linear_regressionLS(values, results, nrow);
-    Matrix m = matrix_create(4, 3);
-    Matrix b = matrix_create(4, 3);
+    Matrix m = matrix_create_empty(4, 3);
+    Matrix b = matrix_create_empty(4, 3);
     matrix_fill(&m, 20);
     matrix_fill(&b, 60);
     matrix_print(m);
@@ -37,7 +37,7 @@ int main(){
     matrix_print(m);
     printf("----------------------------\n");
     matrix_randomize(&m, -10, 105.0);
-    // matrix_map(&m, sigmoid);
+    matrix_map(&m, sigmoid);
     matrix_print(m);
     printf("----------------------------\n");
     Matrix s = matrix_copy(m);
