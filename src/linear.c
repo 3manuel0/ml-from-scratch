@@ -19,7 +19,7 @@ f64 relu(f64 n){
     return n > 0.0 ? n : 0.0;
 }
 
-// TODO:do a good gradient descent
+// TODO:do a good stochastic gradient descent (SGD)
 void linear_regression(size_t iter, f64 *values,f64 *result ,size_t count){
     // predicted = a*x + b
     // error = predicted - y
