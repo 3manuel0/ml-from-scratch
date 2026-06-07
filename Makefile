@@ -7,9 +7,9 @@ OBJS = main.o src/linear.o
 CFLAGS = -Wall -std=c99 -Wextra -Werror
 
 ifeq ($(OS),Windows_NT)# for BCryptGenRandom in windows I need -lbcrypt
-Links = -Llib -lc3sv -l3man -lm
+Links = -Llib -l3man -lm -lbcrypt
 else
-Links = -Llib -lc3sv -l3man -lm
+Links = -Llib -l3man -lm
 endif
 
 all: $(TARGET)
